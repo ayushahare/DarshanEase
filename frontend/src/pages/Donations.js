@@ -99,9 +99,9 @@ const Donations = () => {
                         padding: '6px 14px', borderRadius: 3,
                         fontFamily: 'Cinzel, serif', fontSize: '0.75rem',
                         cursor: 'pointer', transition: 'all 0.2s',
-                        background: form.amount == amt ? '#6B0F1A' : 'white',
-                        color: form.amount == amt ? '#E8C96A' : '#6B0F1A',
-                        border: `1px solid ${form.amount == amt ? '#6B0F1A' : 'rgba(201,168,76,0.4)'}`,
+                        background: Number(form.amount) === amt ? '#6B0F1A' : 'white',
+                        color: Number(form.amount) === amt ? '#E8C96A' : '#6B0F1A',
+                        border: `1px solid ${Number(form.amount) === amt ? '#6B0F1A' : 'rgba(201,168,76,0.4)'}`,
                       }}>
                       ₹{amt}
                     </button>
