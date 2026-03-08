@@ -12,7 +12,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://darshanease.vercel.app'  
+    'https://darshanease1.vercel.app'  
   ],
   credentials: true
 }));
