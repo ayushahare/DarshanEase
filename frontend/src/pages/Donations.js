@@ -14,9 +14,13 @@ const Donations = () => {
   const fetchData = async () => {
     try {
       const [t, d] = await Promise.all([getAllTemples(), getMyDonations()]);
-      setTemples(t.data); setDonations(d.data);
-    } catch { toast.error('Failed to load'); }
-    finally { setLoading(false); }
+      setTemples(t.data);
+      setDonations(d.data);
+    } catch {
+      toast.error('Failed to load');
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { fetchData(); }, []);
@@ -31,7 +35,9 @@ const Donations = () => {
       fetchData();
     } catch (err) {
       toast.error(err.response?.data?.message || 'Donation failed');
-    } finally { setSubmitting(false); }
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (loading) return <div className="spinner" />;
@@ -46,20 +52,34 @@ const Donations = () => {
         padding: '52px 24px', textAlign: 'center',
         borderBottom: '2px solid rgba(201,168,76,0.3)'
       }}>
-        <span style={{ fontFamily: 'Cinzel, serif', letterSpacing: '0.28em', fontSize: '0.72rem', color: '#C9A84C', display: 'block', marginBottom: 12 }}>
+        <span style={{
+          fontFamily: 'Cinzel, serif', letterSpacing: '0.28em',
+          fontSize: '0.72rem', color: '#C9A84C',
+          display: 'block', marginBottom: 12
+        }}>
           ✦ SEVA ✦
         </span>
-        <h1 style={{ fontFamily: 'Cinzel, serif', color: 'white', fontSize: '2.2rem', marginBottom: 8 }}>
+        <h1 style={{
+          fontFamily: 'Cinzel, serif', color: 'white',
+          fontSize: '2.2rem', marginBottom: 8
+        }}>
           Make a Donation
         </h1>
-        <p style={{ color: 'rgba(255,255,255,0.6)', fontFamily: 'Crimson Pro, serif', fontStyle: 'italic' }}>
+        <p style={{
+          color: 'rgba(255,255,255,0.6)',
+          fontFamily: 'Crimson Pro, serif', fontStyle: 'italic'
+        }}>
           Support sacred temples and earn divine blessings
         </p>
       </div>
 
       <div className="page-wrap">
         {/* Stats */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 16, marginBottom: 48 }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+          gap: 16, marginBottom: 48
+        }}>
           {[
             { num: donations.length, label: 'Donations Made' },
             { num: `₹${totalDonated.toLocaleString()}`, label: 'Total Donated' },
@@ -72,28 +92,43 @@ const Donations = () => {
           ))}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 36, alignItems: 'start' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1.2fr',
+          gap: 36, alignItems: 'start'
+        }}>
           {/* Donation Form */}
           <div className="card fade-up" style={{ padding: 36 }}>
-            <h4 style={{ fontFamily: 'Cinzel, serif', color: '#6B0F1A', marginBottom: 28, fontSize: '1rem' }}>
+            <h4 style={{
+              fontFamily: 'Cinzel, serif', color: '#6B0F1A',
+              marginBottom: 28, fontSize: '1rem'
+            }}>
               🙏 Donate to a Temple
             </h4>
             <form onSubmit={handleDonate}>
               <div style={{ marginBottom: 20 }}>
                 <label className="label">Select Temple</label>
-                <select className="input" value={form.temple}
-                  onChange={e => setForm({ ...form, temple: e.target.value })} required>
+                <select
+                  className="input"
+                  value={form.temple}
+                  onChange={e => setForm({ ...form, temple: e.target.value })}
+                  required
+                >
                   <option value="">— Choose a Temple —</option>
-                  {temples.map(t => <option key={t._id} value={t._id}>{t.name}</option>)}
+                  {temples.map(t => (
+                    <option key={t._id} value={t._id}>{t.name}</option>
+                  ))}
                 </select>
               </div>
 
-              {/* Preset amounts */}
+              {/* ✅ Preset amounts - fixed === */}
               <div style={{ marginBottom: 20 }}>
                 <label className="label">Amount (₹)</label>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 10 }}>
                   {PRESET_AMOUNTS.map(amt => (
-                    <button key={amt} type="button"
+                    <button
+                      key={amt}
+                      type="button"
                       onClick={() => setForm({ ...form, amount: amt })}
                       style={{
                         padding: '6px 14px', borderRadius: 3,
@@ -102,27 +137,41 @@ const Donations = () => {
                         background: Number(form.amount) === amt ? '#6B0F1A' : 'white',
                         color: Number(form.amount) === amt ? '#E8C96A' : '#6B0F1A',
                         border: `1px solid ${Number(form.amount) === amt ? '#6B0F1A' : 'rgba(201,168,76,0.4)'}`,
-                      }}>
+                      }}
+                    >
                       ₹{amt}
                     </button>
                   ))}
                 </div>
-                <input type="number" className="input" placeholder="Or enter custom amount"
-                  value={form.amount} min="1"
-                  onChange={e => setForm({ ...form, amount: e.target.value })} required />
+                <input
+                  type="number"
+                  className="input"
+                  placeholder="Or enter custom amount"
+                  value={form.amount}
+                  min="1"
+                  onChange={e => setForm({ ...form, amount: e.target.value })}
+                  required
+                />
               </div>
 
               <div style={{ marginBottom: 28 }}>
                 <label className="label">Message (Optional)</label>
-                <textarea className="input" rows={3} placeholder="Your blessing message..."
+                <textarea
+                  className="input"
+                  rows={3}
+                  placeholder="Your blessing message..."
                   value={form.message}
                   onChange={e => setForm({ ...form, message: e.target.value })}
-                  style={{ resize: 'vertical' }} />
+                  style={{ resize: 'vertical' }}
+                />
               </div>
 
-              <button type="submit" className="btn-primary"
+              <button
+                type="submit"
+                className="btn-primary"
                 style={{ width: '100%', padding: 13, fontSize: '0.88rem' }}
-                disabled={submitting}>
+                disabled={submitting}
+              >
                 {submitting ? 'Processing...' : '🙏 Donate Now'}
               </button>
             </form>
@@ -130,7 +179,10 @@ const Donations = () => {
 
           {/* Donation History */}
           <div>
-            <h4 style={{ fontFamily: 'Cinzel, serif', color: '#6B0F1A', marginBottom: 24, fontSize: '1rem' }}>
+            <h4 style={{
+              fontFamily: 'Cinzel, serif', color: '#6B0F1A',
+              marginBottom: 24, fontSize: '1rem'
+            }}>
               My Donation History
             </h4>
             {donations.length === 0 ? (
@@ -141,14 +193,29 @@ const Donations = () => {
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {donations.map((d, i) => (
-                  <div key={d._id} className={`card fade-up-${Math.min(i + 1, 5)}`} style={{ padding: '18px 22px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <div
+                    key={d._id}
+                    className={`card fade-up-${Math.min(i + 1, 5)}`}
+                    style={{ padding: '18px 22px' }}
+                  >
+                    <div style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-start'
+                    }}>
                       <div>
-                        <h6 style={{ fontFamily: 'Cinzel, serif', color: '#6B0F1A', fontSize: '0.88rem', marginBottom: 4 }}>
+                        <h6 style={{
+                          fontFamily: 'Cinzel, serif', color: '#6B0F1A',
+                          fontSize: '0.88rem', marginBottom: 4
+                        }}>
                           🛕 {d.temple?.name}
                         </h6>
                         {d.message && (
-                          <p style={{ fontFamily: 'Crimson Pro, serif', fontStyle: 'italic', color: '#7A5C3A', fontSize: '0.95rem' }}>
+                          <p style={{
+                            fontFamily: 'Crimson Pro, serif',
+                            fontStyle: 'italic', color: '#7A5C3A',
+                            fontSize: '0.95rem'
+                          }}>
                             "{d.message}"
                           </p>
                         )}
