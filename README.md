@@ -8,7 +8,17 @@ DarshanEase is a full-stack MERN web application that allows users to explore te
 
 ## 📸 Screenshots
 
-> Home Page · Temple Listing · Booking Flow · Admin Dashboard
+### Home Page
+![Home Page](screenshots/home.png)
+
+### Temple Listing
+![Temples](screenshots/temples.png)
+
+### Temple Detail & Booking
+![Booking](screenshots/booking.png)
+
+### Admin Dashboard
+![Admin](screenshots/admin.png)
 
 ---
 
@@ -245,12 +255,6 @@ Backend  → http://localhost:5000
 - [MongoDB Atlas](https://www.mongodb.com/atlas) — Free cloud database
 - [Cloudinary](https://cloudinary.com) — Free image CDN
 - [Google Fonts](https://fonts.google.com) — Cinzel & Crimson Pro typefaces
-
----
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
